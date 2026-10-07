@@ -1,0 +1,475 @@
+/* ============================================================
+   LEVEL 3 – COMPLEX LAYOUT: CSS GRID IMPLEMENTATION
+   Author : Atigbi Emmanuel Ayomikun
+   Course : Advanced Frontend – BSc Software Engineering, ALU
+   Desc   : The identical three-column layout rebuilt using CSS Grid.
+            The page-wrapper becomes a grid with named template areas,
+            giving each section (header, nav, sidebars, main, footer)
+            an explicit placement. Compare with flexbox-style.css to
+            see how differently the two techniques approach the same result.
+   ============================================================ */
+
+
+/* ── 1. RESET & BASE (identical to Flexbox version) ─────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 16px;
+  background-color: #f4f6ff;
+  color: #0d1333;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul, ol {
+  list-style: none;
+}
+
+
+/* ── 2. PAGE WRAPPER — THE MAIN GRID ───────────────────────── */
+/*
+   This is where Grid shines over Flexbox for page-level layout.
+   Instead of nesting containers, ONE grid declaration on the
+   wrapper controls the entire page structure.
+
+   grid-template-columns: 20% 1fr 20%
+     → left sidebar | main content | right sidebar
+     → 1fr means "take all remaining space" (equivalent to 60%)
+
+   grid-template-rows: auto auto 1fr auto
+     → header(auto height) | nav(auto) | content row(fills page) | footer(auto)
+
+   grid-template-areas: uses named zones — much more readable
+   than remembering column/row numbers.
+*/
+.page-wrapper {
+  display: grid;
+
+  grid-template-columns: 20% 1fr 20%;
+
+  grid-template-rows: auto auto 1fr auto;
+
+  grid-template-areas:
+    "header  header  header"
+    "nav     nav     nav"
+    "sidebar-left  main  sidebar-right"
+    "footer  footer  footer";
+
+  min-height: 100vh;
+}
+
+
+/* ── 3. ASSIGN EACH ELEMENT TO A NAMED GRID AREA ───────────── */
+/*
+   grid-area connects the element to the name used in
+   grid-template-areas above. No need for flex tricks
+   or order changes — placement is declared here explicitly.
+*/
+.site-header   { grid-area: header; }
+.site-nav      { grid-area: nav; }
+.sidebar-left  { grid-area: sidebar-left; }
+.main-content  { grid-area: main; }
+.sidebar-right { grid-area: sidebar-right; }
+.site-footer   { grid-area: footer; }
+
+
+/* ── 4. HEADER ─────────────────────────────────────────────── */
+.site-header {
+  background-color: #131b46;
+  color: #ffffff;
+  padding: 20px 32px;
+}
+
+.header-inner {
+  display: flex; /* flex is still useful for inner alignment */
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.logo {
+  font-size: 1.8rem;
+  font-weight: 900;
+  letter-spacing: -0.5px;
+}
+
+.logo-edu   { color: #ffffff; }
+.logo-spark { color: #3749a9; }
+
+.header-tagline {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+
+/* ── 5. NAVIGATION ─────────────────────────────────────────── */
+.site-nav {
+  background-color: #1b2561;
+  padding: 0 32px;
+}
+
+/* Nav list uses flex internally — still the right tool for a row of links */
+.nav-list {
+  display: flex;
+  flex-direction: row;
+  gap: 4px;
+}
+
+.nav-link {
+  display: block;
+  padding: 14px 18px;
+  color: rgba(255, 255, 255, 0.65);
+  font-size: 0.9rem;
+  font-weight: 600;
+  border-bottom: 3px solid transparent;
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.nav-link:hover,
+.nav-link.active {
+  color: #ffffff;
+  border-bottom-color: #3749a9;
+}
+
+
+/* ── 6. SIDEBARS ───────────────────────────────────────────── */
+/*
+   With Grid, the sidebars don't need flex: 0 0 20%.
+   Their width is already defined by grid-template-columns.
+   We only need to handle padding and internal styling.
+*/
+.sidebar {
+  padding: 24px 20px;
+  background-color: #ffffff;
+  border-right: 1px solid #e0e5f5;
+  overflow-y: auto;
+}
+
+.sidebar-right {
+  border-right: none;
+  border-left: 1px solid #e0e5f5;
+}
+
+.sidebar-title {
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #6b7280;
+  margin-bottom: 12px;
+}
+
+.sidebar-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.sidebar-item {
+  padding: 9px 12px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  color: #374151;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.sidebar-item:hover,
+.sidebar-item.active {
+  background-color: #eef1ff;
+  color: #1b2561;
+  font-weight: 600;
+}
+
+
+/* ── 7. MAIN CONTENT ───────────────────────────────────────── */
+/*
+   Because grid-template-columns already gives main its 60%
+   (via 1fr after the two 20% columns), we only need padding here.
+   No flex tricks needed.
+*/
+.main-content {
+  padding: 28px 32px;
+  background-color: #f8f9ff;
+  overflow-y: auto;
+}
+
+.main-title {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #0d1333;
+  margin-bottom: 4px;
+}
+
+.main-subtitle {
+  font-size: 0.9rem;
+  color: #6b7280;
+  margin-bottom: 24px;
+}
+
+/* Stats row — using Grid internally for equal columns */
+.stats-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* three equal columns */
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.stat-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  background-color: #ffffff;
+  border: 1px solid #e0e5f5;
+  border-radius: 12px;
+  gap: 4px;
+}
+
+.stat-value {
+  font-size: 1.6rem;
+  font-weight: 900;
+  color: #3749a9;
+}
+
+.stat-label {
+  font-size: 0.78rem;
+  color: #6b7280;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.section-heading {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #0d1333;
+  margin-bottom: 14px;
+}
+
+/* Course cards — using Grid for the two-column card layout */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* two equal columns */
+  gap: 14px;
+}
+
+.course-card {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 14px;
+  padding: 16px;
+  background-color: #ffffff;
+  border: 1px solid #e0e5f5;
+  border-radius: 14px;
+  box-shadow: 0 2px 8px rgba(19, 27, 70, 0.06);
+}
+
+.card-icon {
+  font-size: 1.8rem;
+  flex-shrink: 0;
+}
+
+.card-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.card-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #0d1333;
+}
+
+.card-meta {
+  font-size: 0.8rem;
+  color: #6b7280;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 6px;
+  background-color: #e0e5f5;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-top: 4px;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #1b2561, #3749a9);
+  border-radius: 4px;
+}
+
+.progress-fill.done {
+  background: linear-gradient(90deg, #15803d, #22c55e);
+}
+
+
+/* ── 8. LEADERBOARD & BADGES (right sidebar content) ────────── */
+.leaderboard-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.leaderboard-item {
+  padding: 9px 12px;
+  border-radius: 8px;
+  font-size: 0.88rem;
+  background-color: #f8f9ff;
+  color: #374151;
+  font-weight: 500;
+}
+
+.leaderboard-item.gold   { background-color: #fffbeb; color: #92400e; font-weight: 700; }
+.leaderboard-item.silver { background-color: #f1f5f9; color: #334155; font-weight: 700; }
+.leaderboard-item.bronze { background-color: #fff7ed; color: #9a3412; font-weight: 700; }
+
+.badge-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* four equal badge slots */
+  gap: 8px;
+}
+
+.badge {
+  aspect-ratio: 1;
+  border-radius: 10px;
+  background-color: #eef1ff;
+  border: 1px solid #c7ceef;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+}
+
+.badge.locked {
+  background-color: #f1f5f9;
+  border-color: #e2e8f0;
+  opacity: 0.4;
+}
+
+
+/* ── 9. FOOTER ─────────────────────────────────────────────── */
+.site-footer {
+  background-color: #131b46;
+  color: rgba(255, 255, 255, 0.6);
+  padding: 18px 32px;
+  text-align: center;
+}
+
+.footer-text {
+  font-size: 0.85rem;
+}
+
+
+/* ── 10. RESPONSIVE DESIGN ─────────────────────────────────── */
+
+/*
+   TABLET (max-width: 768px)
+   The spec says: sidebars go BELOW main as equal columns.
+   With Grid this is clean — just redefine grid-template-areas
+   and grid-template-columns. No order hacks needed.
+*/
+@media (max-width: 768px) {
+  .page-wrapper {
+    grid-template-columns: 1fr 1fr; /* two equal columns */
+
+    grid-template-areas:
+      "header        header"
+      "nav           nav"
+      "main          main"       /* main spans both columns */
+      "sidebar-left  sidebar-right" /* sidebars side by side below */
+      "footer        footer";
+  }
+
+  /* Stats row drops to one column */
+  .stats-row {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  /* Course cards: one per row on tablet */
+  .card-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar {
+    border-right: none;
+    border-top: 1px solid #e0e5f5;
+  }
+
+  .sidebar-right {
+    border-left: 1px solid #e0e5f5;
+  }
+}
+
+/*
+   MOBILE (max-width: 480px)
+   Everything stacks into a single column.
+   With Grid this is one rule — redefine template-areas as a
+   single-column stack. This is where Grid's readability wins.
+*/
+@media (max-width: 480px) {
+  .page-wrapper {
+    grid-template-columns: 1fr; /* single column */
+
+    grid-template-areas:
+      "header"
+      "nav"
+      "main"
+      "sidebar-left"
+      "sidebar-right"
+      "footer";
+  }
+
+  /* Nav links stack on mobile */
+  .nav-list {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .nav-link {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    border-left: 3px solid transparent;
+    padding: 12px 16px;
+  }
+
+  .nav-link.active,
+  .nav-link:hover {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    border-left-color: #3749a9;
+  }
+
+  /* Stats row: single column on mobile */
+  .stats-row {
+    grid-template-columns: 1fr;
+  }
+
+  .main-content {
+    padding: 20px 16px;
+  }
+
+  .header-inner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .sidebar {
+    border: none;
+    border-top: 1px solid #e0e5f5;
+  }
+}
