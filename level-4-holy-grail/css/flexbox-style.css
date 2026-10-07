@@ -379,35 +379,27 @@ img {
 }
 
 
-/* tablet / laptop */
+/* tablet / laptop (768px – 1024px): narrow sidebars */
 @media (max-width: 1024px) {
   :root {
     --sidebar-width: 180px;
   }
 }
 
-/* small tablet / large phone  */
+/* tablet and below (<=768px) */
 @media (max-width: 768px) {
-  /* Stack sidebars above and below main instead of beside it */
-  .page-body {
-    flex-direction: column;
-  }
-
+  /* Sidebars hidden */
   .sidebar {
-    flex: 0 0 auto;
-    width: 100%;
-    border-width: 0;
-    border-bottom-width: 1px;
+    display: none;
   }
 
-  .sidebar--right {
-    border-top-width: 1px;
-    border-left-width: 0;
+  /* Header nav hidden */
+  .header-nav {
+    display: none;
   }
 
-  /* Cards can be wider with no sidebar competing for space */
-  .card {
-    flex: 1 1 200px;
+  .main-content {
+    padding: 1.5rem 1rem;
   }
 
   .site-nav {
@@ -415,18 +407,14 @@ img {
     height: auto;
     padding: 0.5rem 1rem;
   }
-}
 
-/* tablet and below: hide header nav to prevent Account button overflow */
-@media (max-width: 768px) {
-  .header-nav {
-    display: none;
+  .card {
+    flex: 1 1 200px;
   }
 }
 
-/* mobile */
+/* mobile (<=480px): single column, tighter spacing */
 @media (max-width: 480px) {
-
   .site-header {
     padding: 0 1rem;
   }
@@ -435,7 +423,6 @@ img {
     font-size: var(--font-base);
   }
 
-  /* Single-column cards */
   .card-grid {
     flex-direction: column;
   }
@@ -444,12 +431,7 @@ img {
     flex: 1 1 100%;
   }
 
-  /* Footer columns stack vertically */
   .footer__col {
     flex: 1 1 100%;
-  }
-
-  .main-content {
-    padding: 1.25rem 1rem;
   }
 }
