@@ -3,11 +3,188 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-  <!-- <link rel="stylesheet" href="css/flexbox-style.css"> -->
-  <!-- <link rel="stylesheet" href="css/grid-style.css"> -->
+  <title>Level 4 – Holy Grail Layout</title>
+  <!--
+    Uncomment one at a time to switch implementations:
+    <link rel="stylesheet" href="css/flexbox-style.css">
+    <link rel="stylesheet" href="css/grid-style.css">
+  -->
 </head>
 <body>
-  
+
+  <!-- HEADER: fixed, contains logo and user menu -->
+  <header class="site-header">
+    <div class="header-brand">
+      <img src="assets/logo.jpg" alt="Site logo" class="logo">
+      <span class="brand-name">Holy Grail</span>
+    </div>
+
+    <nav class="header-nav" aria-label="Primary">
+      <a href="#" class="nav-link">Home</a>
+      <a href="#" class="nav-link">About</a>
+      <a href="#" class="nav-link">Work</a>
+      <a href="#" class="nav-link">Contact</a>
+    </nav>
+
+    <div class="user-menu">
+      <button class="btn-user" aria-label="User account">Account</button>
+    </div>
+  </header>
+
+  <!-- NAVIGATION: horizontal menu below header -->
+  <nav class="site-nav" aria-label="Section">
+    <a href="#" class="site-nav__link">Overview</a>
+    <a href="#" class="site-nav__link">Projects</a>
+    <a href="#" class="site-nav__link">Reports</a>
+    <a href="#" class="site-nav__link">Settings</a>
+  </nav>
+
+  <!-- PAGE BODY: left sidebar + main + right sidebar -->
+  <div class="page-body">
+
+    <!-- LEFT SIDEBAR -->
+    <aside class="sidebar sidebar--left" id="sidebar-left" aria-label="Left sidebar">
+      <button
+        class="sidebar__toggle"
+        id="toggle-left"
+        aria-expanded="true"
+        aria-controls="sidebar-left">
+        Collapse
+      </button>
+      <div class="sidebar__content">
+        <p class="sidebar__heading">Navigation</p>
+        <ul class="sidebar__list">
+          <li><a href="#">Dashboard</a></li>
+          <li><a href="#">Analytics</a></li>
+          <li><a href="#">Projects</a></li>
+          <li><a href="#">Calendar</a></li>
+          <li><a href="#">Settings</a></li>
+        </ul>
+      </div>
+    </aside>
+
+    <!-- MAIN CONTENT: card grid -->
+    <main class="main-content" id="main" aria-label="Main content">
+      <h1 class="main-content__title">Holy Grail Layout</h1>
+      <p class="main-content__description">
+        Level 4 implementation using Flexbox and CSS Grid.
+      </p>
+
+      <!-- Card grid — reflowing based on available space -->
+      <section class="card-grid" aria-label="Content cards">
+
+        <article class="card">
+          <h2 class="card__title">Flexbox</h2>
+          <p class="card__body">
+            One-dimensional layout model. Controls alignment and
+            distribution of items along a single axis.
+          </p>
+        </article>
+
+        <article class="card">
+          <h2 class="card__title">CSS Grid</h2>
+          <p class="card__body">
+            Two-dimensional layout system. Defines both rows and columns,
+            enabling complex full-page layouts.
+          </p>
+        </article>
+
+        <article class="card">
+          <h2 class="card__title">Responsiveness</h2>
+          <p class="card__body">
+            Both systems support responsive layouts. This page uses four
+            breakpoints with distinct layout behavior at each.
+          </p>
+        </article>
+
+        <article class="card">
+          <h2 class="card__title">Collapsible Sidebars</h2>
+          <p class="card__body">
+            Left and right sidebars collapse and expand via a class
+            toggle handled with minimal JavaScript.
+          </p>
+        </article>
+
+        <article class="card">
+          <h2 class="card__title">Custom Properties</h2>
+          <p class="card__body">
+            Layout dimensions are stored as CSS custom properties,
+            keeping code DRY and easy to maintain.
+          </p>
+        </article>
+
+        <article class="card">
+          <h2 class="card__title">Subgrid</h2>
+          <p class="card__body">
+            The Grid version uses subgrid to align card internals
+            across the whole grid where the browser supports it.
+          </p>
+        </article>
+
+      </section>
+    </main>
+
+    <!-- RIGHT SIDEBAR -->
+    <aside class="sidebar sidebar--right" id="sidebar-right" aria-label="Right sidebar">
+      <button
+        class="sidebar__toggle"
+        id="toggle-right"
+        aria-expanded="true"
+        aria-controls="sidebar-right">
+        Collapse
+      </button>
+      <div class="sidebar__content">
+        <p class="sidebar__heading">Activity</p>
+        <ul class="sidebar__list">
+          <li>Flexbox draft added</li>
+          <li>Grid draft added</li>
+          <li>Branch created</li>
+          <li>Reflection in progress</li>
+        </ul>
+      </div>
+    </aside>
+
+  </div><!-- /.page-body -->
+
+  <!-- FOOTER: 3-column grid of links -->
+  <footer class="site-footer">
+    <div class="footer__grid">
+
+      <div class="footer__col">
+        <h3 class="footer__heading">Resources</h3>
+        <ul class="footer__links">
+          <li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_flexible_box_layout">MDN Flexbox</a></li>
+          <li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_grid_layout">MDN Grid</a></li>
+          <li><a href="https://css-tricks.com/snippets/css/a-guide-to-flexbox/">CSS-Tricks Flexbox</a></li>
+          <li><a href="https://css-tricks.com/snippets/css/complete-guide-grid/">CSS-Tricks Grid</a></li>
+        </ul>
+      </div>
+
+      <div class="footer__col">
+        <h3 class="footer__heading">Team</h3>
+        <ul class="footer__links">
+          <li>Yonas Dejene — Level 4</li>
+          <li>Emmanuel Atigbi</li>
+          <li>Maxime Hirwa</li>
+          <li>Lea Abatoni</li>
+        </ul>
+      </div>
+
+      <div class="footer__col">
+        <h3 class="footer__heading">Project</h3>
+        <ul class="footer__links">
+          <li><a href="https://github.com/ydejene/Week-5-flexbox-grid-adv-frontend">Repository</a></li>
+          <li><a href="../README.md">README</a></li>
+          <li><a href="docs/reflection.md">Reflection</a></li>
+        </ul>
+      </div>
+
+    </div>
+    <p class="footer__copy">&copy; 2026 Team 26 &middot; ALU BSE Advanced Frontend Cohort 1 </p>
+  </footer>
+
+  <!-- Sidebar toggle — minimal JS, only class manipulation -->
+  <script src="js/toggle.js"></script>
+
 </body>
 </html>
