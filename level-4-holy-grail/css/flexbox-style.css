@@ -5,7 +5,8 @@
   --header-height: 60px;
   --nav-height: 44px;
   --sidebar-width: 220px;
-  --sidebar-transition: width 0.3s ease, padding 0.3s ease, opacity 0.25s ease;
+  --sidebar-collapsed-width: 36px; /* keeps toggle button visible when collapsed */
+  --sidebar-transition: max-width 0.3s ease, opacity 0.25s ease;
 
   /* Colours used through out the project*/
   --bg-main: #fdfaf2;         
@@ -185,8 +186,10 @@ img {
 
 /* SIDEBARS */
 .sidebar {
-  flex: 0 0 var(--sidebar-width);
+  flex-shrink: 0;
+  max-width: var(--sidebar-width);
   width: var(--sidebar-width);
+  min-width: var(--sidebar-collapsed-width); /* always show at least the toggle */
   background-color: var(--surface);
   border-color: var(--border);
   border-style: solid;
@@ -200,10 +203,9 @@ img {
 .sidebar--left  { border-right-width: 1px; }
 .sidebar--right { border-left-width: 1px; }
 
-/* Collapsed state — content fades, width collapses to 0 */
+/* Collapsed state — max-width animates, content fades but toggle stays visible */
 .sidebar.collapsed {
-  flex: 0 0 0;
-  width: 0;
+  max-width: var(--sidebar-collapsed-width);
 }
 
 .sidebar.collapsed .sidebar__content {
@@ -322,7 +324,6 @@ img {
   font-size: var(--font-sm);
   color: var(--text-muted);
   line-height: 1.6;
-  flex-grow: 1; /* pushes future card footers to the bottom */
 }
 
 /* FOOTER */
@@ -416,11 +417,15 @@ img {
   }
 }
 
-/* mobile */
-@media (max-width: 480px) {
+/* tablet and below: hide header nav to prevent Account button overflow */
+@media (max-width: 768px) {
   .header-nav {
     display: none;
   }
+}
+
+/* mobile */
+@media (max-width: 480px) {
 
   .site-header {
     padding: 0 1rem;
