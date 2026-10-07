@@ -157,6 +157,7 @@ img {
   position: sticky;
   top: var(--header-height);
   z-index: 90;
+  margin-top: var(--header-height); /* offset body content below fixed header */
   background-color: var(--surface);
   border-bottom: 1px solid var(--border);
 
@@ -417,6 +418,16 @@ img {
 
   .main-content {
     padding: 1.5rem 1rem;
+  }
+
+  .site-header {
+    /* Since .header-nav is gone, header only has 2 items */
+    grid-template-columns: max-content 1fr;
+  }
+
+  .user-menu {
+    /* Push the user menu to the far right inside the 1fr column */
+    justify-self: end;
   }
 
   .header-nav {
