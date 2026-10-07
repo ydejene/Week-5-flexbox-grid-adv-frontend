@@ -25,3 +25,28 @@ Flexbox felt more intuitive at first because I had used it before for simpler la
 ## When would I use one over the other?
 
 I would use Grid for page-level structure — anything where content spans rows and columns at the same time. I would use Flexbox for component-level layouts — nav bars, card rows, button groups, anything that flows in one direction. In practice, the two work best together. This project used both: Grid for the page skeleton, Flexbox for the pieces inside it.
+
+## Problem Encountered and How I Fixed It
+
+When I first tested the Grid version, all the content was 
+squeezed into the left side of the page with the middle and 
+right sections completely empty.
+
+The problem was where I applied the grid. I had 
+grid-template-areas on .page-wrapper, but the sidebars and 
+main content are not direct children of .page-wrapper — they 
+sit inside .content-wrapper. CSS Grid only controls its direct 
+children, so it could not see the sidebars at all and they 
+just collapsed.
+
+The fix was moving the grid declaration from .page-wrapper 
+to .content-wrapper, which is the actual parent of the three 
+columns. Once I did that, grid-template-columns: 20% 1fr 20% 
+and the named areas left, main, right worked exactly as 
+expected.
+
+This taught me something important: Grid does not care about 
+your full page structure. It only works one level deep. Before 
+applying Grid, you have to ask yourself — who is the direct 
+parent of the elements I want to arrange? That is the element 
+that gets display: grid, not any ancestor above it.
