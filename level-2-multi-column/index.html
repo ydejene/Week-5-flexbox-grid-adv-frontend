@@ -1,16 +1,15 @@
-
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <title>Level 2 - Multi-Column Layout</title>
 
     <!-- Flexbox version -->
-    <link rel="stylesheet" href="css/flexbox-style.css">
-     <!-- Grid -->
-    <!--<link rel="stylesheet" href="css/grid-style.css">-->
+    <link rel="stylesheet" href="css/flexbox-style.css" />
+    <!-- Grid -->
+    <!-- <link rel="stylesheet" href="css/grid-style.css"> -->
 
     <!--
     To test Grid, comment out the Flexbox link above
@@ -18,60 +17,55 @@
 
     <link rel="stylesheet" href="css/grid-style.css">
     -->
-</head>
+  </head>
 
-<body>
-
+  <body>
     <header class="header">
-        <h1>My Multi-Column Page</h1>
-        <p>Level 2 Layout - Flexbox and Grid</p>
+      <h1>My Multi-Column Page</h1>
+      <p>Level 2 Layout - Flexbox and Grid</p>
     </header>
 
     <nav class="navigation">
-        <a href="#">Home</a>
-        <a href="#">About</a>
-        <a href="#">Services</a>
-        <a href="#">Contact</a>
+      <a href="#">Home</a>
+      <a href="#">About</a>
+      <a href="#">Services</a>
+      <a href="#">Contact</a>
     </nav>
 
     <main class="main-container">
+      <section class="main-content">
+        <h2>Main Content</h2>
 
-        <section class="main-content">
-            <h2>Main Content</h2>
+        <p>
+          This is the main content area of the webpage. It takes 70% of the
+          available width on desktop screens.
+        </p>
 
-            <p>
-                This is the main content area of the webpage.
-                It takes 70% of the available width on desktop screens.
-            </p>
+        <p>
+          The layout is created using both Flexbox and CSS Grid to demonstrate
+          how the two layout systems work.
+        </p>
+      </section>
 
-            <p>
-                The layout is created using both Flexbox and CSS Grid
-                to demonstrate how the two layout systems work.
-            </p>
+      <aside class="sidebar">
+        <h2>Sidebar</h2>
 
-        </section>
+        <p>This sidebar takes 30% of the available width on desktop.</p>
 
-        <aside class="sidebar">
-            <h2>Sidebar</h2>
-
-            <p>
-                This sidebar takes 30% of the available width on desktop.
-            </p>
-
-            <ul>
-                <li>Useful Link</li>
-                <li>Recent Posts</li>
-                <li>Resources</li>
-            </ul>
-
-        </aside>
-
+        <ul>
+          <li>Useful Link</li>
+          <li>Recent Posts</li>
+          <li>Resources</li>
+          <li>Popular Categories</li>
+          <li>Trending Topics</li>
+          <li>Featured Case Studies</li>
+          <li>Upcoming Events & Webinars</li>
+        </ul>
+      </aside>
     </main>
 
     <footer class="footer">
-        <p>&copy; 2026 Multi-Column Layout. All rights reserved.</p>
+      <p>&copy; 2026 Multi-Column Layout. All rights reserved.</p>
     </footer>
-
-</body>
+  </body>
 </html>
-
