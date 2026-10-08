@@ -5,8 +5,7 @@
   --header-height: 60px;
   --nav-height: 44px;
   --sidebar-width: 220px;
-  --sidebar-collapsed-width: 36px; /* keeps toggle button visible when collapsed */
-  --sidebar-transition: max-width 0.3s ease, opacity 0.25s ease;
+  --sidebar-transition: width 0.3s ease, opacity 0.25s ease;
 
   /* Colours used through out the project*/
   --bg-main: #fdfaf2;         
@@ -147,12 +146,12 @@ img {
   background-color: #b83d14;
 }
 
-/* SECONDARY NAV: sticky so it stays visible while scrolling past main content.*/
+/* SECONDARY NAV */
 .site-nav {
   position: sticky;
   top: var(--header-height);
   z-index: 90;
-  margin-top: var(--header-height); /* offset body content below fixed header */
+  margin-top: var(--header-height);
   height: var(--nav-height);
   background-color: var(--surface);
   border-bottom: 1px solid var(--border);
@@ -178,18 +177,17 @@ img {
 
 /* PAGE BODY */
 .page-body {
+  position: relative;
   display: flex;
   flex-direction: row;
-  flex-grow: 1;        /* stretch between nav and footer */
+  flex-grow: 1;
   align-items: stretch;
 }
 
 /* SIDEBARS */
 .sidebar {
   flex-shrink: 0;
-  max-width: var(--sidebar-width);
   width: var(--sidebar-width);
-  min-width: var(--sidebar-collapsed-width); /* always show at least the toggle */
   background-color: var(--surface);
   border-color: var(--border);
   border-style: solid;
@@ -203,14 +201,35 @@ img {
 .sidebar--left  { border-right-width: 1px; }
 .sidebar--right { border-left-width: 1px; }
 
-/* Collapsed state — max-width animates, content fades but toggle stays visible */
 .sidebar.collapsed {
-  max-width: var(--sidebar-collapsed-width);
+  width: 0;
+  border-width: 0;
+  overflow: visible;
 }
 
 .sidebar.collapsed .sidebar__content {
-  opacity: 0;
-  pointer-events: none;
+  display: none;
+}
+
+.sidebar.collapsed .sidebar__toggle {
+  position: absolute;
+  top: 0.5rem;
+  width: auto;
+  padding: 0.4rem 0.75rem;
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  z-index: 60;
+  white-space: nowrap;
+}
+
+.sidebar--left.collapsed .sidebar__toggle {
+  left: 0.75rem;
+}
+
+.sidebar--right.collapsed .sidebar__toggle {
+  right: 0.75rem;
 }
 
 .sidebar__toggle {
@@ -279,7 +298,7 @@ img {
 .main-content {
   flex: 1 1 0;
   min-width: 0;
-  padding: 2rem 1.5rem;
+  padding: 3rem 1.5rem 2rem;
   overflow-y: auto;
 }
 
@@ -388,18 +407,38 @@ img {
 
 /* tablet and below (<=768px) */
 @media (max-width: 768px) {
-  /* Sidebars hidden */
-  .sidebar {
-    display: none;
+  :root {
+    --header-height: 104px;
   }
 
-  /* Header nav hidden */
-  .header-nav {
-    display: none;
+  .site-header {
+    flex-wrap: wrap;
+    padding: 0.5rem 1rem;
+    align-content: center;
+    row-gap: 0.5rem; 
   }
+
+  .header-nav {
+    display: flex;
+    flex-wrap: wrap;
+    order: 3;
+    flex-basis: 100%;
+  }
+
+  /* Off-canvas sidebars overlay the main content */
+  .sidebar {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    height: 100%;
+    z-index: 50;
+    box-shadow: 0 0 15px rgba(0,0,0,0.1);
+  }
+  .sidebar--left { left: 0; }
+  .sidebar--right { right: 0; }
 
   .main-content {
-    padding: 1.5rem 1rem;
+    padding: 3rem 1rem 1.5rem;
   }
 
   .site-nav {
@@ -409,29 +448,28 @@ img {
   }
 
   .card {
-    flex: 1 1 200px;
-  }
-}
-
-/* mobile (<=480px): single column, tighter spacing */
-@media (max-width: 480px) {
-  .site-header {
-    padding: 0 1rem;
-  }
-
-  .brand-name {
-    font-size: var(--font-base);
+    flex: 1 1 100%;
   }
 
   .card-grid {
     flex-direction: column;
   }
 
-  .card {
+  .footer__col {
     flex: 1 1 100%;
   }
 
-  .footer__col {
-    flex: 1 1 100%;
+  .brand-name {
+    font-size: var(--font-base);
+  }
+}
+
+@media (max-width: 480px) {
+  .header-nav {
+    gap: 0.125rem;
+  }
+  .header-nav .nav-link {
+    padding: 0.25rem 0.4rem;
+    font-size: 0.75rem;
   }
 }
