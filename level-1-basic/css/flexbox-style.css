@@ -25,6 +25,13 @@ header {
   justify-content: center;
 }
 
+header h1 {
+  margin: 0;
+  padding: 0 1rem;
+  text-align: center;
+  font-size: clamp(1.25rem, 6vw, 2rem);
+}
+
 /* Main content */
 main {
   flex-grow: 1;
@@ -40,6 +47,13 @@ footer {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+footer p {
+  margin: 0;
+  padding: 0 1rem;
+  text-align: center;
+  font-size: clamp(0.75rem, 3.5vw, 1rem);
 }
 
 /* Mobile */
