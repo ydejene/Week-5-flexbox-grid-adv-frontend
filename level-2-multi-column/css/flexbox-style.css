@@ -1,0 +1,134 @@
+
+/* =========================
+   Flexbox Multi-Column Layout
+   ========================= */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+/* =========================
+   Header
+   ========================= */
+
+.header {
+    width: 100%;
+    padding: 30px;
+    text-align: center;
+    background: #333;
+    color: white;
+}
+
+.header h1 {
+    margin: 0 0 10px;
+}
+
+/* =========================
+   Navigation
+   ========================= */
+
+.navigation {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 15px;
+    background: #555;
+}
+
+.navigation a {
+    color: white;
+    text-decoration: none;
+    padding: 10px 15px;
+}
+
+/* =========================
+   Main Content Container
+   ========================= */
+
+.main-container {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+/* Main content - 70% */
+
+.main-content {
+    flex-basis: 70%;
+    padding: 30px;
+    background: #f2f2f2;
+}
+
+/* Sidebar - 30% */
+
+.sidebar {
+    flex-basis: 30%;
+    padding: 30px;
+    background: #ddd;
+}
+
+/* =========================
+   Footer
+   ========================= */
+
+.footer {
+    width: 100%;
+    padding: 20px;
+    text-align: center;
+    background: #333;
+    color: white;
+}
+
+/* =========================
+   Tablet / Mobile Layout
+   ========================= */
+
+@media (max-width: 768px) {
+
+    .main-container {
+        flex-direction: column;
+    }
+
+    .main-content,
+    .sidebar {
+        flex-basis: 100%;
+        width: 100%;
+    }
+
+    .navigation {
+        flex-direction: column;
+        align-items: center;
+        gap: 5px;
+    }
+}
+
+/* =========================
+   Small Phone Layout
+   ========================= */
+
+@media (max-width: 480px) {
+
+    .header {
+        padding: 20px;
+    }
+
+    .header h1 {
+        font-size: 24px;
+    }
+
+    .main-content,
+    .sidebar {
+        padding: 20px;
+    }
+
+    .navigation a {
+        padding: 8px 10px;
+    }
+}
+
